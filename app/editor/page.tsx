@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { EditorShell } from '@/components/editor/editor-shell'
@@ -13,7 +14,15 @@ export default function EditorPage() {
     <div className="flex min-h-screen flex-col bg-[#09090b]">
       <Navbar />
       <main className="flex flex-1 flex-col">
-        <EditorShell />
+        <Suspense
+          fallback={
+            <div className="flex flex-1 items-center justify-center text-[#52525b] text-sm">
+              Cargando editor…
+            </div>
+          }
+        >
+          <EditorShell />
+        </Suspense>
       </main>
       <Footer />
     </div>
